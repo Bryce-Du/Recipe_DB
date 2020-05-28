@@ -1,0 +1,6 @@
+User.create(:username=> "Albert", :password=>"abcd")
+User.create(:username=> "Barbara", :password=>"efgh")
+Recipe.create(:name=> "Salad", :instructions=>"Toss ingredients eternally")
+Recipe.create(:name=> "Soup", :instructions=>"Boil until face is fully melted")
+Ingredient.create(:name=>"Tomato", :calories=>30)
+Ingredient.create(:name=>"Lettuce", :calories=>25)
