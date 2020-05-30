@@ -1,0 +1,13 @@
+<div align="center">
+    <br><br><h1>Login to your Account</h1><br><br>
+    <% if @error %>
+        <%= @error %>
+    <% end %>
+    <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="user[username]"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="user[password]"><br><br>
+        <input type="submit" value="Log In">
+    </form>
+</div>
