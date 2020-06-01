@@ -1,7 +1,9 @@
 <div class="container">
   <% if logged_in? %>
     <h3>Welcome to Recipe Database, <%= current_user.username%>! </h3>
-    <a href="/logout">Log Out</a>
+    
+    <a href="/ingredients">View Pantry</a>
+    <a href="/logout">Log Out</a> 
   <% else %>
     <h3>Welcome to Recipe Database, please log in or sign up below!</h3>
     <a href="/login">Log In</a> | <a href="/signup">Sign Up</a>

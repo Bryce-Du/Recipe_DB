@@ -1,0 +1,19 @@
+<% if @users_ingredients.empty? %>
+    <p>Looks like you don't have any items in your pantry.</p>
+<% else %>
+    <table>
+        <tr>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Calories</th>
+        </tr>
+        <% @users_ingredients.each do |users_ingredient| %>
+            <% ingredient = Ingredient.find(users_ingredient.ingredient_id) %>
+            <tr><%=ingredient.name%></tr>
+            <tr><%=users_ingredient.quantity%></tr>
+            <tr><%=ingredient.calories%></tr>
+        <% end %>
+    </table>
+<%end%>
+<br><br><br>
+<a href="ingredients/new">Create New Ingredient</a>
