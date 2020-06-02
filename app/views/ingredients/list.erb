@@ -17,7 +17,7 @@
                     <td align="center"><%=users_ingredient.quantity%></td>
                     <td align="center"><%=ingredient.calories%></td>
                     <td>
-                        <a href=/ingredients/<%= @ingredient.id %>/edit">Edit</a>
+                        <a href="/ingredients/<%=ingredient.id%>/edit">Edit</a>
                     </td>
                     <td>    
                         <form method="post" action="/ingredients/<%= ingredient.id %>">

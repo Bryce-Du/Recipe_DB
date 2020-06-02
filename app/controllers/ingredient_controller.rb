@@ -12,7 +12,7 @@ class IngredientController < ApplicationController
     end
     get "/ingredients/:id/edit" do
         @ingredient = Ingredient.find(params[:id])
-        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id])
+        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id]).first
         erb :"ingredients/edit"
     end
     post "/ingredients/new" do
@@ -35,6 +35,9 @@ class IngredientController < ApplicationController
     end
     patch "/ingredients/:id/edit" do
         @ingredient = Ingredient.find(params[:id])
-        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id])
+        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id]).first
+        @users_ingredient.update(params["users_ingredient"])
+        @ingredient.update(params["ingredient"])
+        redirect to "/ingredients"
     end
 end
