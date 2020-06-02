@@ -2,10 +2,11 @@
     <% if @users_recipes.empty? %>
         <p>Looks like you don't have any recipes saved.</p>
     <% else %>
+        <h2>Recipes:</h2>
         <ol>
             <% @users_recipes.each do |users_recipe| %>
                 <% recipe = Recipe.find(users_recipe.recipe_id)%>
-                <li>recipe.name</li>
+                <li><%=recipe.name%></li>
             <%end%>
         </ol>
     <%end%>

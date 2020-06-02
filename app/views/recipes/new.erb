@@ -3,9 +3,14 @@
     <form method="post" action="/recipes/new">
         <label for="recipe">Name:</label>
         <input type="text" name="recipe[name]"><br><br>
-        <label for="ingredients">Ingredients:</label><br> 
-        <input type="text" name="recipes_ingredient[ingredients][][name]"><br>
-        <input type="text" name="recipes_ingredient[ingredients][][name]"><br><br>
+        <label for="ingredients">Ingredient:</label>
+        <input type="text" name="recipes_ingredient[][ingredient][name]">
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="recipes_ingredient[][quantity]" size="1"><br>
+        <label for="ingredients">Ingredient:</label>
+        <input type="text" name="recipes_ingredient[][ingredient][name]">
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="recipes_ingredient[][quantity]" size="1"><br><br>
         <label for="instructions">Instructions:</label>
         <input type="text" name="recipe[instructions]" size="50"><br><br>
         <input type="submit" value="Create Recipe">
