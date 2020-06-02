@@ -1,0 +1,15 @@
+<div align="center">
+    <br><h3>Create new recipe:</h3><br><br>
+    <form method="post" action="/recipes/new">
+        <label for="ingredient">Name:</label>
+        <input type="text" name="ingredient[name]"><br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="users_ingredient[quantity]" min=1><br><br>
+        <label for="calories">Calories:</label>
+        <input type="number" name="ingredient[calories]"><br><br>
+        <input type="submit" value="Create Recipe">
+    </form>
+    <br>
+    <a href="/recipes">Return to Recipes</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>

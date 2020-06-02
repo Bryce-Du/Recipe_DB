@@ -1,0 +1,14 @@
+<div align="center">
+    <% if @users_recipes.empty? %>
+        <p>Looks like you don't have any recipes saved.</p>
+    <% else %>
+        <ol>
+            <% @users_recipes.each do |users_recipe| %>
+                <% recipe = Recipe.find(users_recipe.recipe_id)%>
+                <li>recipe.name</li>
+            <%end%>
+        </ol>
+    <%end%>
+    <br><br><br><a href="recipes/new">Create New Recipe</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>
