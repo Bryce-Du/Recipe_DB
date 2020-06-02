@@ -1,0 +1,11 @@
+<div align="center">
+    <h3>Ingredient: <%= @ingredient.name %></h3>
+    <h3>Calories: <%= @ingredient.calories %></h3>
+    <br><a href=/ingredients/<%= @ingredient.id %>/edit">Edit</a>
+    <br><form method="post" action="/ingredients/<%= @ingredient.id %>">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="delete">
+    </form>
+
+    <br><br><a href="/ingredients">Return to Pantry</a>
+</div>

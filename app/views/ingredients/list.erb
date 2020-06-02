@@ -7,18 +7,26 @@
                 <th>Ingredient</th>
                 <th>Quantity</th>
                 <th>Calories</th>
+                <th>Edit Item</th>
+                <th>Delete Item</th>
             </tr>
             <% @users_ingredients.each do |users_ingredient| %>
                 <% ingredient = Ingredient.find(users_ingredient.ingredient_id) %>
                 <tr>
-                    <td align="center"><%=ingredient.name%></td>
+                    <td align="center"><a href="/ingredients/<%=ingredient.id%>"><%=ingredient.name%></a></td>
                     <td align="center"><%=users_ingredient.quantity%></td>
                     <td align="center"><%=ingredient.calories%></td>
+                    <td>
+                        <a href=/ingredients/<%= @ingredient.id %>/edit">Edit</a>
+                    </td>
+                    <td>    
+                        <form method="post" action="/ingredients/<%= ingredient.id %>">
+                            <input id="hidden" type="hidden" name="_method" value="DELETE">
+                            <input type="submit" value="delete">
+                        </form>
+                    </td>
                 </tr>
-                # add buttons to side of table that edit or delete 
-                # <form>
-                #     <input type="
-                # </form>
+                
             <% end %>
         </table>
     <%end%>

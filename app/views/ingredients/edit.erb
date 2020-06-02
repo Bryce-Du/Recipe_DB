@@ -1,0 +1,15 @@
+<div align="center">
+    <br><h3>Create new item:</h3><br><br>
+    <form action="/ingredients/<%= @ingredient.id %>/edit" method="post">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+        <label for="ingredient">Name:</label>
+        <input type="text" name="ingredient[name]" value="<%= @ingredient.name %>"><br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="users_ingredient[quantity]" min=1 value="<%= @users_ingredient.quantity %>"><br><br>
+        <label for="calories">Calories:</label>
+        <input type="number" name="ingredient[calories]" value="<%= @ingredient.calories %>"><br><br>
+        <input type="submit" value="Update Item">
+    </form>
+    <br>
+    <a href="/ingredients">Return to Pantry</a>
+</div>

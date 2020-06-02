@@ -6,6 +6,15 @@ class IngredientController < ApplicationController
     get "/ingredients/new" do 
         erb :"/ingredients/new"
     end
+    get "/ingredients/:id" do
+        @ingredient = Ingredient.find(params[:id])
+        erb :"ingredients/show"
+    end
+    get "/ingredients/:id/edit" do
+        @ingredient = Ingredient.find(params[:id])
+        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id])
+        erb :"ingredients/edit"
+    end
     post "/ingredients/new" do
         /# technically, if the user already has an item in their pantry, they should just be updating the quantity with edit
         but they shouldn't be expected to know what they already have. #/
@@ -23,5 +32,9 @@ class IngredientController < ApplicationController
             UsersIngredient.create(user_id: current_user.id, ingredient_id: ingredient.id, quantity: params["users_ingredient"]["quantity"])
         end
         redirect to "/ingredients"
+    end
+    patch "/ingredients/:id/edit" do
+        @ingredient = Ingredient.find(params[:id])
+        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id])
     end
 end
