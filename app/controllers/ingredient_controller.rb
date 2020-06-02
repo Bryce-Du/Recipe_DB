@@ -35,13 +35,13 @@ class IngredientController < ApplicationController
     end
     patch "/ingredients/:id/edit" do
         @ingredient = Ingredient.find(params[:id])
-        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id]).first
+        @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).find_by(:ingredient_id=>params[:id])
         @users_ingredient.update(params["users_ingredient"])
         @ingredient.update(params["ingredient"])
         redirect to "/ingredients"
     end
     delete "/ingredients/:id" do
-        UsersIngredient.delete(UsersIngredient.where(:user_id=>current_user.id).where(:ingredient_id=>params[:id]).first.id)
+        UsersIngredient.delete(UsersIngredient.where(:user_id=>current_user.id).find_by(:ingredient_id=>params[:id]).id)
         redirect to "/ingredients"
     end
 end

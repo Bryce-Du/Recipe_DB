@@ -38,4 +38,14 @@ class RecipeController < ApplicationController
         end
         redirect to "/recipes"
     end
+    delete "/recipes/:id" do
+        UsersRecipe.delete(UsersRecipe.where(recipe_id: params[:id]).find_by(user_id: current_user.id).id)
+        redirect to "/recipes"
+    end
+
+    #browse all
+
+    get "/browse" do
+        
+    end
 end

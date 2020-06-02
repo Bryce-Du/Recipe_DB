@@ -6,7 +6,13 @@
         <ol>
             <% @users_recipes.each do |users_recipe| %>
                 <% recipe = Recipe.find(users_recipe.recipe_id)%>
-                <li><a href="/recipes/<%=recipe.id%>"><%=recipe.name%></a> | <a href="/recipes/<%=recipe.id%>/edit">Edit</a></li>
+                <li>
+                    <a href="/recipes/<%=recipe.id%>"><%=recipe.name%></a> | <a href="/recipes/<%=recipe.id%>/edit">Edit</a>
+                    <form method="post" action="/recipes/<%= recipe.id %>">
+                        <input id="hidden" type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Remove">
+                    </form> 
+                </li>
             <%end%>
         </ol>
     <%end%>

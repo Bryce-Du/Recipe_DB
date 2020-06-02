@@ -11,7 +11,11 @@
     <ol>
         <li><%=@recipe.instructions%></li>
     </ol>
-    <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a> 
+    <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
+    <form method="post" action="/recipes/<%= @recipe.id %>">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Remove">
+    </form>
     <br><br><a href="/recipes">Return to Recipes</a>
     <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
 </div>
