@@ -1,0 +1,17 @@
+<div align="center">
+    <h2>Recipe: <%= @recipe.name %></h2>
+    <h3>Ingredients:</h3>
+    <ol>
+    <% @recipes_ingredients.each do |recipe_ingredient| %>
+        <% ingredient = Ingredient.find(recipe_ingredient.ingredient_id) %>
+        <li> - <%=recipe_ingredient.quantity%> <%=(recipe_ingredient.quantity < 2) ? ingredient.name : ingredient.name.pluralize %></li>
+    <%end%>
+    </ol>
+    <h3>Instructions:</h3>
+    <ol>
+        <li><%=@recipe.instructions%></li>
+    </ol>
+    <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a> 
+    <br><br><a href="/recipes">Return to Recipes</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>

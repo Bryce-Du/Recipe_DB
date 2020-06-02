@@ -1,0 +1,22 @@
+<div align="center">
+    <br><h3>Update Recipe:</h3><br><br>
+    <form method="post" action="/recipes/<%= @recipe.id %>/edit">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+        <label for="recipe">Name:</label>
+        <input type="text" name="recipe[name]" value="<%= @recipe.name%>"><br><br>
+        <% @recipes_ingredients.each do |recipes_ingredient| %>
+            <% ingredient = Ingredient.find(recipes_ingredient.ingredient_id) %>    
+            <label for="ingredients">Ingredient:</label>
+            <input type="text" name="recipes_ingredient[][ingredient][name]" value="<%= ingredient.name%>">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="recipes_ingredient[][quantity]" size="1" value="<%= recipes_ingredient.quantity%>"><br>
+        <%end%>
+        <br>
+        <label for="instructions">Instructions:</label>
+        <input type="text" name="recipe[instructions]" size="50" value="<%=@recipe.instructions%>"><br><br>
+        <input type="submit" value="Update Recipe">
+    </form>
+    <br>
+    <a href="/recipes">Return to Recipes</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>

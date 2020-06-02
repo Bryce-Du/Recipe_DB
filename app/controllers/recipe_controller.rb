@@ -6,6 +6,16 @@ class RecipeController < ApplicationController
     get "/recipes/new" do 
         erb :"/recipes/new"
     end
+    get "/recipes/:id" do
+        @recipe = Recipe.find(params[:id])
+        @recipes_ingredients = RecipesIngredient.where(recipe_id: @recipe.id)
+        erb :"/recipes/show"
+    end
+    get "/recipes/:id/edit" do
+        @recipe = Recipe.find(params[:id])
+        @recipes_ingredients = RecipesIngredient.where(recipe_id: @recipe.id)
+        erb :"/recipes/edit"
+    end
     post "/recipes/new" do
         # unlike ingredients where an item of the same name should have the same info, 
         # two different recipes might exist that are called the same thing, but prepared in a unique way
@@ -17,5 +27,7 @@ class RecipeController < ApplicationController
         # assign the recipe to the user
         UsersRecipe.create(recipe_id: recipe.id, user_id: current_user.id)
         redirect to "/recipes"
+    end
+    patch "/recipes/:id/edit" do
     end
 end

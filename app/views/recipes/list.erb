@@ -6,7 +6,7 @@
         <ol>
             <% @users_recipes.each do |users_recipe| %>
                 <% recipe = Recipe.find(users_recipe.recipe_id)%>
-                <li><%=recipe.name%></li>
+                <li><a href="/recipes/<%=recipe.id%>"><%=recipe.name%></a></li>
             <%end%>
         </ol>
     <%end%>
