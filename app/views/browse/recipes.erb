@@ -1,0 +1,12 @@
+<div align="center">
+    <h2>All Recipes:</h2>
+    <ol>
+        <% @recipes.each do |recipe| %>
+            <li>
+                <a href="/recipes/<%=recipe.id%>"><%=recipe.name%></a>
+            </li>
+        <%end%>
+    </ol>
+    <br><br><br><a href="recipes/new">Create New Recipe</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>

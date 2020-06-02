@@ -46,6 +46,7 @@ class RecipeController < ApplicationController
     #browse all
 
     get "/browse" do
-        
+        @recipes = Recipe.all
+        erb :"/browse/recipes"
     end
 end
