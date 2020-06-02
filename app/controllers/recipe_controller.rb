@@ -29,5 +29,13 @@ class RecipeController < ApplicationController
         redirect to "/recipes"
     end
     patch "/recipes/:id/edit" do
+        @recipe = Recipe.find(params[:id])
+        @recipe.update(params["recipe"]) #updates name and instructions
+        # to update recipes' ingredients, first remove current links, then re-create with new params
+        RecipesIngredient.delete(RecipesIngredient.where(recipe_id: @recipe.id).map{|i| i.id}) 
+        params["recipes_ingredient"].each do |recipe_ingredient|
+            RecipesIngredient.create(ingredient_id: Ingredient.find_or_create_by(name: recipe_ingredient["ingredient"]["name"]).id, quantity: recipe_ingredient["quantity"], recipe_id: @recipe.id)
+        end
+        redirect to "/recipes"
     end
 end
