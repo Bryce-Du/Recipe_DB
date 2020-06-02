@@ -6,4 +6,7 @@ class RecipeController < ApplicationController
     get "/recipes/new" do 
         erb :"/recipes/new"
     end
+    post "/recipes/new" do
+        binding.pry
+    end
 end
