@@ -1,12 +1,19 @@
 <div align="center">
     <h3>Ingredient: <%= @ingredient.name %></h3>
     <h3>Calories: <%= @ingredient.calories %></h3>
-    <br><a href=/ingredients/<%= @ingredient.id %>/edit">Edit</a>
-    <br><form method="post" action="/ingredients/<%= @ingredient.id %>">
-        <input id="hidden" type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="delete">
+    <%if !!@users_ingredient%>
+        <br><a href="/ingredients/<%= @ingredient.id %>/edit">Edit</a>
+        <br><form method="post" action="/ingredients/<%= @ingredient.id %>">
+            <input id="hidden" type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Remove from Pantry">
+        </form>
+    <%else%>
+    <form method="post" action="/ingredients/<%= @ingredient.id %>/add">
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" min=1>
+        <input type="submit" value="Add to Pantry">
     </form>
-
+    <%end%>
     <br><br><a href="/ingredients">Return to Pantry</a>
     <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
 </div>

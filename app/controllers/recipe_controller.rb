@@ -6,6 +6,10 @@ class RecipeController < ApplicationController
     get "/recipes/new" do 
         erb :"/recipes/new"
     end
+    get "/recipes/browse" do
+        @recipes = Recipe.all
+        erb :"/browse/recipes"
+    end
     get "/recipes/:id" do
         @recipe = Recipe.find(params[:id])
         @recipes_ingredients = RecipesIngredient.where(recipe_id: @recipe.id)
@@ -45,13 +49,9 @@ class RecipeController < ApplicationController
     end
     delete "/recipes/:id" do
         UsersRecipe.delete(UsersRecipe.where(recipe_id: params[:id]).find_by(user_id: current_user.id).id)
+        if !UsersRecipe.find_by(recipe_id: params[:id]) #if this recipe is not in anyone's cookbook.
+            Recipe.delete(params[:id]) #delete the recipe itself
+        end
         redirect to "/recipes"
-    end
-
-    #browse all
-
-    get "/browse" do
-        @recipes = Recipe.all
-        erb :"/browse/recipes"
     end
 end

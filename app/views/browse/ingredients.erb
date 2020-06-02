@@ -1,0 +1,12 @@
+<div align="center">
+    <h2>Ingredients:</h2>
+    <ol>
+        <% @ingredients.each do |ingredient| %>
+            <li>
+                <a href="/ingredients/<%=ingredient.id%>"><%=ingredient.name%></a>Calories:<%=ingredient.calories%>
+            </li>
+        <%end%>
+    </ol>
+    <br><br><br><a href="ingredients/new">Create New Ingredient</a> | <a href="/ingredients">Return to your Pantry</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>

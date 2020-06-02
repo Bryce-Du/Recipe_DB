@@ -6,8 +6,13 @@ class IngredientController < ApplicationController
     get "/ingredients/new" do 
         erb :"/ingredients/new"
     end
+    get "/ingredients/browse" do
+        @ingredients = Ingredient.all
+        erb :"/browse/ingredients"
+    end
     get "/ingredients/:id" do
         @ingredient = Ingredient.find(params[:id])
+        @users_ingredient = UsersIngredient.find_by(ingredient_id: @ingredient.id)
         erb :"ingredients/show"
     end
     get "/ingredients/:id/edit" do
@@ -31,6 +36,10 @@ class IngredientController < ApplicationController
             ingredient = Ingredient.create(params["ingredient"])
             UsersIngredient.create(user_id: current_user.id, ingredient_id: ingredient.id, quantity: params["users_ingredient"]["quantity"])
         end
+        redirect to "/ingredients"
+    end
+    post "/ingredients/:id/add" do
+        UsersIngredient.create(ingredient_id: params[:id], user_id: current_user.id, quantity: params["quantity"])
         redirect to "/ingredients"
     end
     patch "/ingredients/:id/edit" do
