@@ -1,5 +1,8 @@
 <div align="center">
     <h2>Recipe: <%= @recipe.name %></h2>
+    <% if !!@recipe.creator_id %>
+        <p>Created by: <%= User.find(@recipe.creator_id).username%></p>
+    <%end%>
     <h3>Ingredients:</h3>
     <ol>
     <% @recipes_ingredients.each do |recipe_ingredient| %>
@@ -11,11 +14,18 @@
     <ol>
         <li><%=@recipe.instructions%></li>
     </ol>
-    <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
-    <form method="post" action="/recipes/<%= @recipe.id %>">
-        <input id="hidden" type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Remove">
-    </form>
+    <% if @recipe.creator_id == current_user.id %>
+        <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
+        <form method="post" action="/recipes/<%= @recipe.id %>">
+            <input id="hidden" type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Remove">
+        </form>
+    
+    <% elsif !UsersRecipe.where(user_id: current_user.id).find_by(recipe_id: @recipe.id) %>
+        <form method="post" action="/recipes/<%= @recipe.id %>/add">
+            <input type="submit" value="Add to your Recipes">
+        </form>
+    <%end%>
     <br><br><a href="/recipes">Return to Recipes</a> | <a href="/browse">Browse All Recipes</a>
     <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
 </div>
