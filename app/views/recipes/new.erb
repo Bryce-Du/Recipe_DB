@@ -3,14 +3,16 @@
     <form method="post" action="/recipes/new">
         <label for="recipe">Name:</label>
         <input type="text" name="recipe[name]"><br><br>
-        <label for="ingredients">Ingredient:</label>
-        <input type="text" name="recipes_ingredient[][ingredient][name]">
+        <label for="ingredient list">Choose from Ingredients</label>
+        <input list="ingredients" name="recipes_ingredient[][ingredient][name]">
         <label for="quantity">Quantity:</label>
-        <input type="number" name="recipes_ingredient[][quantity]" size="1"><br>
-        <label for="ingredients">Ingredient:</label>
-        <input type="text" name="recipes_ingredient[][ingredient][name]">
+        <input type="number" name="recipes_ingredient[][quantity]"><br><br>
+        <label for="ingredients">Make new Ingredient:</label>
+        <input type="text" name="recipes_ingredient[][ingredient][name]"><br>
         <label for="quantity">Quantity:</label>
-        <input type="number" name="recipes_ingredient[][quantity]" size="1"><br><br>
+        <input type="number" name="recipes_ingredient[][quantity]"><br>
+        <label for="calories">Calories:</label>
+        <input type="number" name="recipes_ingredient[][ingredient][calories]"><br><br>
         <label for="instructions">Instructions:</label>
         <input type="text" name="recipe[instructions]" size="50"><br><br>
         <input type="submit" value="Create Recipe">
@@ -19,3 +21,8 @@
     <a href="/recipes">Return to Recipes</a>
     <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
 </div>
+<datalist id="ingredients">
+    <% Ingredient.all.each do |ingredient| %>
+        <option value= <%= ingredient.name %>>
+    <%end%>
+</datalist>

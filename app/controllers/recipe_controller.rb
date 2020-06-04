@@ -27,7 +27,9 @@ class RecipeController < ApplicationController
         recipe.update(creator_id: current_user.id)
         # for each ingredient listed, find_or_create the ingredient, and then create the join model
         params["recipes_ingredient"].each do |recipe_ingredient|
-            RecipesIngredient.create(ingredient_id: Ingredient.find_or_create_by(name: recipe_ingredient["ingredient"]["name"]).id, quantity: recipe_ingredient["quantity"], recipe_id: recipe.id)
+            ingredient = Ingredient.find_by(name: recipe_ingredient["ingredient"]["name"])
+            ingredient ||= Ingredient.create(recipe_ingredient["ingredient"])
+            RecipesIngredient.create(ingredient_id: ingredient.id, quantity: recipe_ingredient["quantity"], recipe_id: recipe.id)
         end
         # assign the recipe to the user
         UsersRecipe.create(recipe_id: recipe.id, user_id: current_user.id)

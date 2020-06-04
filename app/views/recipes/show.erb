@@ -2,6 +2,7 @@
     <h2>Recipe: <%= @recipe.name %></h2>
     <% if !!@recipe.creator_id %>
         <p>Created by: <%= User.find(@recipe.creator_id).username%></p>
+        <p>Total Calories: <%=@recipe.total_calories%></p>
     <%end%>
     <h3>Ingredients:</h3>
     <ol>
