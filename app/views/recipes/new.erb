@@ -1,18 +1,83 @@
 <div align="center">
+    <script type='text/javascript'>
+        function addInputPreExisting(divName){
+            var label1 = document.createElement('label');
+            label1.innerHTML = " Name: ";
+            document.getElementById(divName).appendChild(label1);
+            var input1 = document.createElement('input');
+            input1.type = "text";
+            input1.setAttribute('list', "ingredients");
+            input1.name = "recipes_ingredient[][ingredient][name]"
+            document.getElementById(divName).appendChild(input1);
+            var label2 = document.createElement('label');
+            label2.innerHTML = " Quantity: ";
+            document.getElementById(divName).appendChild(label2);
+            var input2 = document.createElement('input');
+            input2.type = "number";
+            input2.name = "recipes_ingredient[][quantity]"
+            document.getElementById(divName).appendChild(input2);
+            document.getElementById(divName).appendChild(document.createElement('br'));
+        }
+        function addInputNew(divName){
+            var label1 = document.createElement('label');
+            label1.innerHTML = " Name: ";
+            document.getElementById(divName).appendChild(label1);
+            var input1 = document.createElement('input');
+            input1.type = "text";
+            input1.name = "recipes_ingredient[][ingredient][name]"
+            document.getElementById(divName).appendChild(input1);
+            var label2 = document.createElement('label');
+            label2.innerHTML = " Quantity: ";
+            document.getElementById(divName).appendChild(label2);
+            var input2 = document.createElement('input');
+            input2.type = "number";
+            input2.name = "recipes_ingredient[][quantity]"
+            document.getElementById(divName).appendChild(input2);
+            var label3 = document.createElement('label');
+            label3.innerHTML = " Calories: ";
+            document.getElementById(divName).appendChild(label3);
+            var input3 = document.createElement('input');
+            input3.type = "number";
+            input3.name = "recipes_ingredient[][ingredient][calories]"
+            document.getElementById(divName).appendChild(input3);
+            document.getElementById(divName).appendChild(document.createElement('br'));
+        }
+    </script>
+    <datalist id="ingredients">
+        <% Ingredient.all.each do |ingredient| %>
+            <option value= <%= ingredient.name %>>
+        <%end%>
+    </datalist>
     <br><h3>Create new recipe:</h3><br><br>
     <form method="post" action="/recipes/new">
         <label for="recipe">Name:</label>
         <input type="text" name="recipe[name]"><br><br>
-        <label for="ingredient list">Choose from Ingredients</label>
-        <input list="ingredients" name="recipes_ingredient[][ingredient][name]">
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="recipes_ingredient[][quantity]"><br><br>
-        <label for="ingredients">Make new Ingredient:</label>
-        <input type="text" name="recipes_ingredient[][ingredient][name]"><br>
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="recipes_ingredient[][quantity]"><br>
-        <label for="calories">Calories:</label>
-        <input type="number" name="recipes_ingredient[][ingredient][calories]"><br><br>
+        <!-- -->
+        <p>Choose from existing ingredients:</p>
+        <div id="existing_ingredients"> 
+            <label for="ingredient list">Name: </label>
+            <input list="ingredients" name="recipes_ingredient[][ingredient][name]">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="recipes_ingredient[][quantity]"><br>
+        </div>
+        <br>
+        <input type="button" value="Add another" onclick="addInputPreExisting('existing_ingredients')">
+        
+        <!-- -->
+        <br><br><br>
+        <p>Make a new ingredient:</p>
+        <div id="new_ingredients"> 
+            <label for="ingredients">Name:</label>
+            <input type="text" name="recipes_ingredient[][ingredient][name]">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="recipes_ingredient[][quantity]">
+            <label for="calories">Calories:</label>
+            <input type="number" name="recipes_ingredient[][ingredient][calories]"><br>
+        </div>
+        <br>
+        <input type="button" value="Add another" onclick="addInputNew('new_ingredients')"><br><br>
+
+        <!-- -->
         <label for="instructions">Instructions:</label>
         <input type="text" name="recipe[instructions]" size="50"><br><br>
         <input type="submit" value="Create Recipe">
@@ -21,8 +86,3 @@
     <a href="/recipes">Return to Recipes</a>
     <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
 </div>
-<datalist id="ingredients">
-    <% Ingredient.all.each do |ingredient| %>
-        <option value= <%= ingredient.name %>>
-    <%end%>
-</datalist>
