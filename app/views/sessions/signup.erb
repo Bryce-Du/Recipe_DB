@@ -1,10 +1,13 @@
 <div align="center">
     <br><br><h1>Create New User:</h1><br><br>
+    <% if !!@error %>
+        <%= @error %>
+    <%end%>
     <form action="/signup" method="post">
         <label for="username">Username:</label>
-        <input type="text" name="user[username]"><br><br>
+        <input type="text" name="user[username]" required><br><br>
         <label for="password">Password:</label>
-        <input type="password" name="user[password]"><br><br>
+        <input type="password" name="user[password]" required><br><p>Passwords must be at least 8 characters long.</p><br>
         <input type="submit" value="Sign Up">
     </form>
 </div>

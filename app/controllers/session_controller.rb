@@ -3,9 +3,17 @@ class SessionController < ApplicationController
         erb :'sessions/signup'
     end
     post "/signup" do
-        user = User.create(params[:user])
-        session[:user_id] = user.id
-        redirect to "/"
+        if params[:user]["username"] == "admin"
+            @error = "Invalid Username, please try again."
+            erb :'sessions/signup'
+        elsif params[:user]["password"].size < 8 
+            @error = "Password too short, please try again."
+            erb :'sessions/signup'
+        else
+            user = User.create(params[:user])
+            session[:user_id] = user.id
+            redirect to "/"
+        end
     end
     get "/login" do
         erb :"/sessions/login"
