@@ -49,7 +49,7 @@ class IngredientController < ApplicationController
         @ingredient.update(params["ingredient"])
         redirect to "/ingredients"
     end
-    delete "/ingredients/:id" do
+    delete "/ingredients/:id/remove" do
         UsersIngredient.delete(UsersIngredient.where(:user_id=>current_user.id).find_by(:ingredient_id=>params[:id]).id)
         redirect to "/ingredients"
     end

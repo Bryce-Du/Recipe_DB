@@ -20,9 +20,9 @@
                         <a href="/ingredients/<%=ingredient.id%>/edit">Edit</a>
                     </td>
                     <td>    
-                        <form method="post" action="/ingredients/<%= ingredient.id %>">
+                        <form method="post" action="/ingredients/<%= ingredient.id %>/remove">
                             <input id="hidden" type="hidden" name="_method" value="DELETE">
-                            <input type="submit" value="delete">
+                            <input type="submit" value="Remove from Pantry">
                         </form>
                     </td>
                 </tr>

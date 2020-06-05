@@ -1,9 +1,15 @@
 <div align="center">
     <h3>Ingredient: <%= @ingredient.name %></h3>
     <h3>Calories: <%= @ingredient.calories %></h3>
+    <%if current_user == User.find_by(username: "admin") %>
+        <form method="post" action="/ingredients/<%= @ingredient.id %>/destroy">
+            <input id="hidden" type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Remove from Database.">
+        </form>
+    <% end %>
     <%if !!@users_ingredient%>
         <br><a href="/ingredients/<%= @ingredient.id %>/edit">Edit</a>
-        <br><form method="post" action="/ingredients/<%= @ingredient.id %>">
+        <br><form method="post" action="/ingredients/<%= @ingredient.id %>/remove">
             <input id="hidden" type="hidden" name="_method" value="DELETE">
             <input type="submit" value="Remove from Pantry">
         </form>
