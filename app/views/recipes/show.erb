@@ -19,7 +19,7 @@
         <a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
         <form method="post" action="/recipes/<%= @recipe.id %>">
             <input id="hidden" type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Remove">
+            <input type="submit" value="Delete Recipe">
         </form>
     
     <% elsif !UsersRecipe.where(user_id: current_user.id).find_by(recipe_id: @recipe.id) %>

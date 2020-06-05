@@ -49,7 +49,7 @@ class IngredientController < ApplicationController
     patch "/ingredients/:id/edit" do
         @ingredient = Ingredient.find(params[:id])
         @users_ingredient = UsersIngredient.where(:user_id=>current_user.id).find_by(:ingredient_id=>params[:id])
-        if params["users_ingredient"]["quantity"].to_i == 0 #if quantity reduced to zero, remove from pantry
+        if params["users_ingredient"]["quantity"].to_i == 0 # if quantity reduced to zero, remove from pantry
             UsersIngredient.delete(UsersIngredient.where(:user_id=>current_user.id).find_by(:ingredient_id=>params[:id]).id)
         else
             @users_ingredient.update(params["users_ingredient"])
