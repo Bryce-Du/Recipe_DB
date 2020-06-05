@@ -53,4 +53,12 @@ class IngredientController < ApplicationController
         UsersIngredient.delete(UsersIngredient.where(:user_id=>current_user.id).find_by(:ingredient_id=>params[:id]).id)
         redirect to "/ingredients"
     end
+    delete "/ingredients/:id/destroy" do
+        if current_user == User.find_by(username: "admin")
+            UsersIngredient.delete(UsersIngredient.where(ingredient_id: params[:id]).map{|i| i.id}) # delete users references to this ingredient
+            RecipesIngredient.delete(RecipesIngredient.where(ingredient_id: params[:id]).map{|i| i.id}) # delete recipes references to this ingredient
+            Ingredient.destroy(:id)
+        end
+        redirect to "/ingredients"
+    end
 end
