@@ -1,13 +1,45 @@
 <div align="center">
-    <br><h3>Create new item:</h3><br><br>
+    <script type='text/javascript'>
+        function addInput(divName){
+            var label1 = document.createElement('label');
+            label1.innerHTML = " Name: ";
+            document.getElementById(divName).appendChild(label1);
+            var input1 = document.createElement('input');
+            input1.type = "text";
+            input1.name = "ingredient[][name]"
+            document.getElementById(divName).appendChild(input1);
+            document.getElementById(divName).appendChild(document.createElement('br'));
+            var label2 = document.createElement('label');
+            label2.innerHTML = " Quantity: ";
+            document.getElementById(divName).appendChild(label2);
+            var input2 = document.createElement('input');
+            input2.type = "number";
+            input2.name = "users_ingredient[][quantity]"
+            document.getElementById(divName).appendChild(input2);
+            document.getElementById(divName).appendChild(document.createElement('br'));
+            var label3 = document.createElement('label');
+            label3.innerHTML = " Calories: ";
+            document.getElementById(divName).appendChild(label3);
+            var input3 = document.createElement('input');
+            input3.type = "number";
+            input3.name = "ingredient[][calories]"
+            document.getElementById(divName).appendChild(input3);
+            document.getElementById(divName).appendChild(document.createElement('br'));
+            document.getElementById(divName).appendChild(document.createElement('br'));
+        }
+    </script>
+    <br><h3>Add item to Pantry:</h3><br><br>
     <form method="post" action="/ingredients/new">
-        <label for="ingredient">Name:</label>
-        <input type="text" name="ingredient[name]"><br><br>
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="users_ingredient[quantity]" min=1><br><br>
-        <label for="calories">Calories:</label>
-        <input type="number" name="ingredient[calories]"><br><br>
-        <input type="submit" value="Add to Pantry">
+        <div id="ingredients">
+            <label for="ingredient">Name:</label>
+            <input type="text" name="ingredient[][name]"><br>
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="users_ingredient[][quantity]" min=1><br>
+            <label for="calories">Calories:</label>
+            <input type="number" name="ingredient[][calories]"><br><br>
+        </div>
+        <br><input type="button" value="Add another" onclick="addInput('ingredients')"><br><br><br>
+        <input type="submit" value="Add item(s) to Pantry">
     </form>
     <br>
     <a href="/ingredients">Return to Pantry</a>
