@@ -23,6 +23,7 @@
             var input3 = document.createElement('input');
             input3.type = "number";
             input3.name = "ingredient[][calories]"
+            input3.value = 0;
             document.getElementById(divName).appendChild(input3);
             document.getElementById(divName).appendChild(document.createElement('br'));
             document.getElementById(divName).appendChild(document.createElement('br'));
@@ -36,7 +37,7 @@
             <label for="quantity">Quantity:</label>
             <input type="number" name="users_ingredient[][quantity]" min=1><br>
             <label for="calories">Calories:</label>
-            <input type="number" name="ingredient[][calories]"><br><br>
+            <input type="number" name="ingredient[][calories]" value=0><br><br>
         </div>
         <br><input type="button" value="Add another" onclick="addInput('ingredients')"><br><br><br>
         <input type="submit" value="Add item(s) to Pantry">

@@ -25,19 +25,21 @@ class IngredientController < ApplicationController
         but they shouldn't be expected to know what they already have. #/
         ingredients = params["ingredient"]
         ingredients.each_with_index do |ingredient_hash, index|
-            quantity = params["users_ingredient"][index]["quantity"].to_i
-            ingredient = Ingredient.find_by(name: ingredient_hash["name"])
-            if !!ingredient
-                users_ingredient = UsersIngredient.find_by(ingredient_id: ingredient.id)
-                if !!users_ingredient
-                    users_ingredient.quantity += quantity
-                    users_ingredient.save
-                else
+            if ingredient_hash["name"] != "" # don't add from blank inputs
+                quantity = params["users_ingredient"][index]["quantity"].to_i
+                ingredient = Ingredient.find_by(name: ingredient_hash["name"])
+                if !!ingredient
+                    users_ingredient = UsersIngredient.find_by(ingredient_id: ingredient.id)
+                    if !!users_ingredient
+                        users_ingredient.quantity += quantity
+                        users_ingredient.save
+                    else
+                        UsersIngredient.create(user_id: current_user.id, ingredient_id: ingredient.id, quantity: quantity)
+                    end
+                else 
+                    ingredient = Ingredient.create(ingredient_hash)
                     UsersIngredient.create(user_id: current_user.id, ingredient_id: ingredient.id, quantity: quantity)
                 end
-            else 
-                ingredient = Ingredient.create(ingredient_hash)
-                UsersIngredient.create(user_id: current_user.id, ingredient_id: ingredient.id, quantity: quantity)
             end
         end
         redirect to "/ingredients"
