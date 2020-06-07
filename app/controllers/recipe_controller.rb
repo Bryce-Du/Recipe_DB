@@ -17,7 +17,6 @@ class RecipeController < ApplicationController
         erb :"/browse/search"
     end
     get "/recipes/search_with_pantry" do
-        binding.pry
         if logged_in?
             @recipes = Recipe.all.select{|i| i.can_be_made_by?(current_user)}
             @scope = "pantry"

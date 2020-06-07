@@ -2,7 +2,7 @@
     <script type='text/javascript'>
         function addInputPreExisting(divName){
             var label1 = document.createElement('label');
-            label1.innerHTML = " Name: ";
+            label1.innerHTML = "Ingredient Name: ";
             document.getElementById(divName).appendChild(label1);
             var input1 = document.createElement('input');
             input1.type = "text";
@@ -20,7 +20,7 @@
         }
         function addInputNew(divName){
             var label1 = document.createElement('label');
-            label1.innerHTML = " Name: ";
+            label1.innerHTML = "Ingredient Name: ";
             document.getElementById(divName).appendChild(label1);
             var input1 = document.createElement('input');
             input1.type = "text";
@@ -50,12 +50,12 @@
     </datalist>
     <br><h3>Create new recipe:</h3><br><br>
     <form method="post" action="/recipes/new">
-        <label for="recipe">Name:</label>
-        <input type="text" name="recipe[name]"><br><br>
+        <label for="recipe">Recipe Name:</label>
+        <input type="text" name="recipe[name]" autocomplete="off"><br><br>
         <!-- -->
-        <p>Choose from existing ingredients:</p>
+        <h4>Choose from existing ingredients:</h4>
         <div id="existing_ingredients"> 
-            <label for="ingredient list">Name: </label>
+            <label for="ingredient list">Ingredient Name: </label>
             <input list="ingredients" name="recipes_ingredient[][ingredient][name]">
             <label for="quantity">Quantity:</label>
             <input type="number" name="recipes_ingredient[][quantity]"><br>
@@ -65,9 +65,9 @@
         
         <!-- -->
         <br><br><br>
-        <p>Make a new ingredient:</p>
+        <h4>Make a new ingredient:</h4>
         <div id="new_ingredients"> 
-            <label for="ingredients">Name:</label>
+            <label for="ingredients">Ingredient Name:</label>
             <input type="text" name="recipes_ingredient[][ingredient][name]">
             <label for="quantity">Quantity:</label>
             <input type="number" name="recipes_ingredient[][quantity]">
@@ -79,7 +79,7 @@
 
         <!-- -->
         <label for="instructions">Instructions:</label>
-        <input type="text" name="recipe[instructions]" size="50"><br><br>
+        <input type="text" name="recipe[instructions]" autocomplete="off"><br><br>
         <input type="submit" value="Create Recipe">
     </form>
     <br>
