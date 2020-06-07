@@ -1,5 +1,5 @@
 # Recipe_DB
-Sinatra App featuring a database of recipes. Users create profiles where they can record items in their pantry, and recipes in a user cookbook. Users can search for recipes that use the ingredients they have on hand, or search by a single ingredient. They can also 
+Sinatra App featuring a database of recipes. Users create profiles where they can record items in their pantry, and recipes in a user cookbook. Users can search for recipes that use the ingredients they have on hand, or search by a single ingredient.
 
 ## Installation
 
