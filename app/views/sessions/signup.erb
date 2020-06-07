@@ -5,9 +5,9 @@
     <%end%>
     <form action="/signup" method="post">
         <label for="username">Username:</label>
-        <input type="text" name="user[username]" required><br><br>
+        <input type="text" name="user[username]" required autocomplete="off"><br><br>
         <label for="password">Password:</label>
-        <input type="password" name="user[password]" required><br><p>Passwords must be at least 8 characters long.</p><br>
+        <input type="password" name="user[password]" required autocomplete="off"><br><p>Passwords must be at least 8 characters long.</p><br>
         <input type="submit" value="Sign Up">
     </form>
 </div>

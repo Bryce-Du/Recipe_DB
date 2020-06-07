@@ -12,7 +12,7 @@ class IngredientController < ApplicationController
     end
     get "/ingredients/:id" do
         @ingredient = Ingredient.find(params[:id])
-        @users_ingredient = UsersIngredient.find_by(ingredient_id: @ingredient.id)
+        @users_ingredient = UsersIngredient.where(ingredient_id: @ingredient.id).find_by(user_id: current_user.id)
         erb :"ingredients/show"
     end
     get "/ingredients/:id/edit" do
