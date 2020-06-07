@@ -8,6 +8,7 @@ class RecipeController < ApplicationController
     end
     get "/recipes/browse" do
         @recipes = Recipe.all
+        @scope = "all"
         erb :"/browse/recipes"
     end
     get "/recipes/search_by_item/:id" do
@@ -50,31 +51,8 @@ class RecipeController < ApplicationController
     post "/recipes/:id/make" do
         @recipe = Recipe.find(params[:id])
         @recipes_ingredients = @recipe.recipes_ingredients
-        users_ingredients = UsersIngredient.where(user_id: current_user.id)
-        @error = []
-
-        @recipes_ingredients.each do |recipe_ingredient|
-            # first find if the user has any of that item
-            users_ingredient = users_ingredients.detect{|i| i.ingredient_id == recipe_ingredient.ingredient_id}
-            if !!users_ingredient # if the user does have it
-                if users_ingredient.quantity < recipe_ingredient.quantity # if they don't have enough, add error details
-                    @error << "This recipe requires #{recipe_ingredient.quantity} #{recipe_ingredient.quantity > 2 ? recipe_ingredient.ingredient.name.pluralize : recipe_ingredient.ingredient.name}, you only have #{users_ingredient.quantity}."
-                end
-            else # the user doesn't have any, add error details
-                @error << "This recipe requires #{recipe_ingredient.quantity} #{recipe_ingredient.quantity > 2 ? recipe_ingredient.ingredient.name.pluralize : recipe_ingredient.ingredient.name}, you have none."
-            end
-        end
-        if @error.empty? # if the user has enough of all ingredients
-            @recipes_ingredients.each do |recipe_ingredient|
-                users_ingredient = users_ingredients.detect{|i| i.ingredient_id == recipe_ingredient.ingredient_id}
-                if users_ingredient.quantity > recipe_ingredient.quantity # if the user has more than enough, remove that amount
-                    users_ingredient.quantity -= recipe_ingredient.quantity
-                    users_ingredient.save
-                elsif users_ingredient.quantity == recipe_ingredient.quantity # if the user has exactly enough, remove the item from their pantry
-                    UsersIngredient.delete(users_ingredient.id)
-                end
-            end
-            @error << "You made this recipe! Ingredients have been removed from your pantry!"
+        if @recipe.can_be_made_by?(current_user) # if the user has enough of all ingredients
+            @recipe.make_recipe(current_user)
         end
         erb :"/recipes/show"
     end

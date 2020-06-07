@@ -30,15 +30,6 @@
         <form method="post" action="/recipes/<%= @recipe.id %>/make">
             <input type="submit" value="Make this Recipe">
         </form>
-        <% if !@error.empty? %>
-            <br><br>
-            <ol>
-            <% @error.each do |message| %>
-                <li><%=message%></li>
-            <%end%>
-            </ol>
-            
-        <%end%>
     <%end%>
     <br><br><a href="/recipes">Return to Recipes</a> | <a href="/recipes/browse">Browse All Recipes</a>
     <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
