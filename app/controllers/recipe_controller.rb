@@ -16,6 +16,15 @@ class RecipeController < ApplicationController
         @recipe_ids = RecipesIngredient.where(ingredient_id: params[:id]).map{|i| i.recipe_id}
         erb :"/browse/search"
     end
+    get "/recipes/search_with_pantry" do
+        if logged_in?
+            @recipes = Recipe.all.select{|i| i.can_be_made_by?(current_user)}
+            @scope = "pantry"
+            erb :"/browse/recipes"
+        else
+            redirect to "/"
+        end
+    end
     get "/recipes/:id" do
         @recipe = Recipe.find(params[:id])
         @recipes_ingredients = RecipesIngredient.where(recipe_id: @recipe.id)
