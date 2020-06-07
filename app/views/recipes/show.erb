@@ -8,7 +8,7 @@
     <ol>
     <% @recipes_ingredients.each do |recipe_ingredient| %>
         <% ingredient = Ingredient.find(recipe_ingredient.ingredient_id) %>
-        <li> - <%=recipe_ingredient.quantity%> <%=(recipe_ingredient.quantity < 2) ? ingredient.name : ingredient.name.pluralize %></li>
+        <li> - <%=recipe_ingredient.quantity%> <a href="/ingredients/<%=ingredient.id%>"><%=(recipe_ingredient.quantity < 2) ? ingredient.name : ingredient.name.pluralize %></a></li>
     <%end%>
     </ol>
     <h3>Instructions:</h3>

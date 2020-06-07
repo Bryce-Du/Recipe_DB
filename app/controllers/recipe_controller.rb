@@ -10,6 +10,11 @@ class RecipeController < ApplicationController
         @recipes = Recipe.all
         erb :"/browse/recipes"
     end
+    get "/recipes/search_by_item/:id" do
+        @search_item = Ingredient.find(params[:id])
+        @recipe_ids = RecipesIngredient.where(ingredient_id: params[:id]).map{|i| i.recipe_id}
+        erb :"/browse/search"
+    end
     get "/recipes/:id" do
         @recipe = Recipe.find(params[:id])
         @recipes_ingredients = RecipesIngredient.where(recipe_id: @recipe.id)

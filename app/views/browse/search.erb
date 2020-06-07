@@ -1,0 +1,12 @@
+<div align="center">
+    <h3>Recipes containing <%= @search_item.name %></h3>
+    <ol>
+        <% @recipe_ids.each do |recipe_id| %>
+            <% if !Recipe.where(id: recipe_id).empty? %>
+                <li><a href="/recipes/<%= recipe_id %>"><%= Recipe.find(recipe_id).name %></a></li>
+            <%end%>
+        <%end%>
+    </ol>
+    <br><br><br><a href="/ingredients">View your Pantry</a> | <a href="/recipes">View your Recipes</a>
+    <br><br><a href="/">Return to User Page</a> | <a href="/logout">Log Out</a>
+</div>
